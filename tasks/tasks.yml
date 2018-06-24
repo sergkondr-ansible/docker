@@ -1,0 +1,70 @@
+---
+
+- name: Fail if Docker version is < 17.03
+  fail:
+    msg: "docker_version must be >= 17.03, yours is set to {{ docker_version }}."
+  when: docker_version | version_compare("17.03", "<")
+
+- name: Install packages to enable AUFS for Docker
+  apt:
+    name: "{{ item }}"
+    state: present
+    install_recommends: yes
+  with_items:
+  - "linux-image-extra-{{ ansible_kernel }}"
+  - "aufs-tools"
+
+- name: Install Docker and role dependencies
+  apt:
+    name: "{{ item }}"
+    state: "present"
+    install_recommends: no
+  with_items:
+    - "apt-transport-https"
+    - "ca-certificates"
+    - "software-properties-common"
+    - "python-setuptools"
+    - "python-pkg-resources"
+    - "python-pip"
+
+- name: Get upstream APT GPG key
+  apt_key:
+    url: "{{ docker_apt_key_url }}"
+    state: present
+
+- name: Configure upstream APT repository
+  apt_repository:
+    repo: "{{ docker_repository }}"
+    update_cache: yes
+    state: present
+
+- name: Install Docker
+  apt:
+    name: "docker-ce={{ docker_version }}~{{ docker_edition }}-0~{{ ansible_distribution | lower }}"
+    install_recommends: no
+    update_cache: yes
+    state: present
+
+- name: Upgrade pip to last version
+  pip:
+    name: pip
+    extra_args: --upgrade
+  changed_when: no
+
+- name: Installing docker python package
+  pip: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - docker
+  - docker-py
+
+- name: Install Docker Compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
+    dest: "{{ docker_compose_dest }}"
+    force: yes
+    owner: "root"
+    group: "root"
+    mode: "0755"
+  when: docker_install_compose
