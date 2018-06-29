@@ -5,7 +5,20 @@ galaxy_info:
   description: Install docker
   min_ansible_version: 2.4.2
   github_branch: master
+  license: WTFPL
   platforms:
     - name: Ubuntu
       versions:
         - xenial
+  galaxy_tags:
+  - docker
+
+
+
+
+
+
+
+
+
+
