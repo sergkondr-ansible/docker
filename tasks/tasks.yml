@@ -13,6 +13,7 @@
   with_items:
   - "linux-image-extra-{{ ansible_kernel }}"
   - "aufs-tools"
+  when: docker_enable_AUFS
 
 - name: Install Docker and role dependencies
   apt:

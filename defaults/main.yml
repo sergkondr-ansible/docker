@@ -8,6 +8,7 @@ docker_apt_key_url: "https://download.docker.com/linux/ubuntu/gpg"
 docker_repository: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_release }}"
 docker_apt_cache_time: 86400
 
+docker_enable_AUFS: no
 docker_install_compose: no
 docker_compose_version: "1.21.2"
 docker_compose_dest: "/usr/local/bin/docker-compose"
