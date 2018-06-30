@@ -2,7 +2,7 @@
 
 galaxy_info:
   author: Sergey Kondrashov
-  description: Install docker
+  description: Install docker and docker-compose
   min_ansible_version: 2.4.2
   github_branch: master
   license: WTFPL
@@ -12,13 +12,4 @@ galaxy_info:
         - xenial
   galaxy_tags:
   - docker
-
-
-
-
-
-
-
-
-
-
+  dependencies: []

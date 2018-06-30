@@ -1,5 +1,6 @@
 docker
 =========
+[![Build Status](https://travis-ci.com/sergkondr-ansible/docker.svg?branch=master)](https://travis-ci.com/sergkondr-ansible/docker)
 
 The role install docker and docker-compose(if you wish).
 
@@ -26,9 +27,9 @@ Example Playbook
 License
 -------
 
-WTFPL
+[WTFPL](https://raw.githubusercontent.com/sergkondr/stuff/master/wtfpl-2018.txt)
 
 Author Information
 ------------------
 
-[Sergey Kondrashov](https://github.com/sergkondr)
+:octocat:[Sergey Kondrashov](https://github.com/sergkondr)
