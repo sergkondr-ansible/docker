@@ -53,7 +53,7 @@
   changed_when: no
 
 - name: Installing docker python package
-  pip: 
+  pip:
     name: "{{ item }}"
     state: present
   with_items:
